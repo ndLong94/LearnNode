@@ -74,76 +74,100 @@ exports.createInsurance = function(req, res) {
 }
 
 
-exports.getInsurance = function(req, res) {
-  async.auto({
-   init: function(done) {
-     if(!req.query.insurance_id) {
-       done({
-         code: 400,
-         message: 'Insurance id is missing'
-       });
-       return;
-     }
-   },
-   getInsurance: ['init', function(data, done) {
-     InsuranceModel.findOne({'_id': req.body.insurance_id}).lean().exec(done);
-   }]
- }, function(err, data) {
-   if (err) {
-     res.json(err);
-     return;
-   }
-   res.json({
-     code: 200,
-     message: data.getInsurance
-   });
-   return;
- });
+exports.findInsurance = function(req, res) {
+  InsuranceModel.findOne({"insuranceid": req.query.insuranceid}, function(err, insurance){
+    console.log(insurances);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurances
+        });
+        };
+  })
+  return;
 }
+
 
 exports.getAllInsurance = function(req, res) {
-  async.auto({
-   init: function(done) {
-   },
-   getAllInsurance: ['init', function(data, done) {
-     InsuranceModel.find().lean().exec(done);
-   }]
- }, function(err, data) {
-   if (err) {
-     res.json(err);
-     return;
-   }
-   res.json({
-     code: 200,
-     message: data.getAllInsurance
-   });
-   return;
- });
+  InsuranceModel.find({}, function(err, insurances){
+    console.log(insurances);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurances
+        });
+        };
+  })
+  return;
 }
 
+
 exports.findByType = function(req, res) {
-  async.auto({
-   init: function(done) {
-     if(!req.body.type) {
-       done({
-         code: 400,
-         message: 'Insurance Type is missing'
-       });
-       return;
-     }
-   },
-   getInsurance: ['init', function(data, done) {
-     InsuranceModel.find({'type': req.body.type}).toArray();
-   }]
- }, function(err, data) {
-   if (err) {
-     res.json(err);
-     return;
-   }
-   res.json({
-     code: 200,
-     message: data.getInsurance
-   });
-   return;
- });
+  InsuranceModel.find({"type": req.query.type}, function(err, insurances){
+    console.log(insurances);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurances
+        });
+        };
+  })
+  return;
+}
+
+exports.findByGroup = function(req, res) {
+  InsuranceModel.find({"group": req.query.group}, function(err, insurances){
+    console.log(insurances);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurances
+        });
+        };
+  })
+  return;
+}
+exports.findById = function(req, res) {
+  InsuranceModel.findOne({"insuranceid": req.params.id}, function(err, insurances){
+    console.log(insurances);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurances
+        });
+        };
+  })
+  return;
+}
+
+
+exports.findByStatus = function(req, res) {
+  InsuranceModel.find({"group": req.query.group}, function(err, insurances){
+    console.log(insurances);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurances
+        });
+        };
+  })
+  return;
 }

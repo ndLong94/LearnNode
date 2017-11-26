@@ -80,13 +80,19 @@ exports.getUser = function(req, res) {
 }
 
 exports.getAllUser = function(req, res) {
-    UserModel.find({}, 'name', function(err, users){
+    UserModel.find({}, function(err, users){
+      console.log(users);
         if(err){
-            console.log(err);
+          res.json(err);
+          return;
         }else{
-            return users;
-            };
+          res.json({
+            code: 200,
+            message: users
+          });
+          };
     })
+    return;
 }
 
 exports.getUserByName = function(req, res) {
@@ -104,7 +110,7 @@ exports.getUserByName = function(req, res) {
      });
    },
    getUser: ['init', function(data, done) {
-     console.log('dâta', data);
+     console.log('data', data);
       done(null, data)
    }]
  }, function(err, data) {
@@ -113,7 +119,7 @@ exports.getUserByName = function(req, res) {
      return;
    }
    console.log('data', data)
-  //  delete data.getUser;
+   delete data.getUser;
    res.json({
      code: 200,
      message: data,
