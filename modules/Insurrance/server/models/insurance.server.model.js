@@ -7,6 +7,10 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var InsuranceSchema = new Schema({
+  insuranceId: {
+    type: String,
+    required: true
+  },
   insuranceName: {
     type: String,
     required: true

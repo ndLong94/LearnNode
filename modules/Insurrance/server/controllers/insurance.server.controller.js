@@ -32,6 +32,7 @@ exports.createInsurance = function(req, res) {
    },
    createAcc: ['init', function(data, done) {
      var insurance = {
+       insuranceId: req.body.insuranceId,
        insuranceName: req.body.insuranceName,
        providerId: req.body.providerId,
        type: req.body.type,
@@ -75,7 +76,7 @@ exports.createInsurance = function(req, res) {
 
 
 exports.findInsurance = function(req, res) {
-  InsuranceModel.findOne({"insuranceid": req.query.insuranceid}, function(err, insurance){
+  InsuranceModel.findOne({"insuranceId": req.query.id}, function(err, insurance){
     console.log(insurances);
       if(err){
         res.json(err);
@@ -140,7 +141,7 @@ exports.findByGroup = function(req, res) {
   return;
 }
 exports.findById = function(req, res) {
-  InsuranceModel.findOne({"insuranceid": req.params.id}, function(err, insurances){
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurances){
     console.log(insurances);
       if(err){
         res.json(err);
@@ -156,8 +157,8 @@ exports.findById = function(req, res) {
 }
 
 
-exports.findByStatus = function(req, res) {
-  InsuranceModel.find({"group": req.query.group}, function(err, insurances){
+exports.findByStatusActive = function(req, res) {
+  InsuranceModel.find({"status": "active"}, function(err, insurances){
     console.log(insurances);
       if(err){
         res.json(err);
@@ -166,6 +167,134 @@ exports.findByStatus = function(req, res) {
         res.json({
           code: 200,
           message: insurances
+        });
+        };
+  })
+  return;
+}
+
+exports.findByStatus = function(req, res) {
+  InsuranceModel.find({"status": req.query.status}, function(err, insurances){
+    console.log(insurances);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurances
+        });
+        };
+  })
+  return;
+}
+
+exports.findTimeCreatedById = function(req, res) {
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurance.createdAt
+        });
+        };
+  })
+  return;
+}
+
+exports.findValueById = function(req, res) {
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurance.value
+        });
+        };
+  })
+  return;
+}
+
+exports.findPolicyById = function(req, res) {
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurance.policy
+        });
+        };
+  })
+  return;
+}
+
+exports.findPeriodById = function(req, res) {
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurance.period
+        });
+        };
+  })
+  return;
+}
+
+exports.findPriceById = function(req, res) {
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurance.price
+        });
+        };
+  })
+  return;
+}
+
+exports.findDescriptionById = function(req, res) {
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurance.description
+        });
+        };
+  })
+  return;
+}
+
+exports.findUpdateInfoById = function(req, res) {
+  InsuranceModel.findOne({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: insurance.update
         });
         };
   })
