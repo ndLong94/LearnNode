@@ -5,11 +5,6 @@ var path = require('path'),
   UserModel = mongoose.model('User'),
   async = require('async');
 
-
-exports.helloworld = function(req, res) {
-  res.json('Thảo Ngáo');
-}
-
 exports.createUser = function(req, res) {
   async.auto({
    init: function(done) {

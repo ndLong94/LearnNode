@@ -5,11 +5,6 @@ var path = require('path'),
   InsuranceModel = mongoose.model('Insurance'),
   async = require('async');
 
-
-exports.helloworld = function(req, res) {
-  res.json('Thảo Ngáo');
-}
-
 exports.createInsurance = function(req, res) {
   async.auto({
    init: function(done) {
