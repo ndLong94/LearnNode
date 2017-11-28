@@ -295,3 +295,35 @@ exports.findUpdateInfoById = function(req, res) {
   })
   return;
 }
+
+exports.checkInsuranceExist = function(req, res) {
+  InsuranceModel.find({"insuranceId": req.params.id}, function(err, insurance){
+    console.log(insurance);
+      if(err){
+        res.json(err);
+        return;
+      }else{
+        res.json({
+          code: 200,
+          message: null != insurance
+        });
+        };
+  })
+  return;
+}
+
+// exports.updateInsuranceById = function(req, res) {
+//   InsuranceModel.findOneAndUpdate({"insuranceId": req.params.id}, function(err, insurance){
+//     console.log(insurance);
+//       if(err){
+//         res.json(err);
+//         return;
+//       }else{
+//         res.json({
+//           code: 200,
+//           message: insurance.update
+//         });
+//         };
+//   })
+//   return;
+// }

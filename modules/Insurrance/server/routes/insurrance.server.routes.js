@@ -50,4 +50,10 @@ module.exports = function(app) {
     
   app.route('/insurance/:id/update')
     .get(insurance.findUpdateInfoById);
+
+  app.route('/insurance/:id')
+    .head(insurance.checkInsuranceExist);
+
+  app.route('/insurance/:id')
+    .get(insurance.checkInsuranceExist);
 };
